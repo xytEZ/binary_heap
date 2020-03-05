@@ -3,35 +3,35 @@
 
 namespace tree
 {
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  template <typename... T_Args>
-  BinaryHeap<T, T_Comparator, T_UnderlyingContainer>
-  ::BinaryHeap(T_Args&&... args) : _uc(std::forward<T_Args>(args)...) { }
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  template <typename... TArgs>
+  BinaryHeap<T, TComparator, TUnderlyingContainer>
+  ::BinaryHeap(TArgs&&... args) : _uc(std::forward<TArgs>(args)...) { }
 
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  void BinaryHeap<T, T_Comparator, T_UnderlyingContainer>
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  void BinaryHeap<T, TComparator, TUnderlyingContainer>
   ::reorganize() noexcept
   {
     for (std::uint32_t i = 1; i < _uc.size(); ++i)
       percolateUp(i);
   }
 
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  void BinaryHeap<T, T_Comparator, T_UnderlyingContainer>::push(const T& value)
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  void BinaryHeap<T, TComparator, TUnderlyingContainer>::push(const T& value)
   {
     _uc.emplace_back(value);
     percolateUp(_uc.size() - 1);
   }
 
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  void BinaryHeap<T, T_Comparator, T_UnderlyingContainer>::push(T&& value)
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  void BinaryHeap<T, TComparator, TUnderlyingContainer>::push(T&& value)
   {
     _uc.emplace_back(std::move(value));
     percolateUp(_uc.size() - 1);
   }
 
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  T BinaryHeap<T, T_Comparator, T_UnderlyingContainer>::pop()
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  T BinaryHeap<T, TComparator, TUnderlyingContainer>::pop()
   {
     std::size_t size = _uc.size();
     
@@ -48,8 +48,8 @@ namespace tree
     return value;
   }
   
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  void BinaryHeap<T, T_Comparator, T_UnderlyingContainer>::sort() noexcept
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  void BinaryHeap<T, TComparator, TUnderlyingContainer>::sort() noexcept
   {
     for (int i = _uc.size() - 1; i >= 0; --i)
       {
@@ -58,24 +58,24 @@ namespace tree
       }
   }
 
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  std::size_t BinaryHeap<T, T_Comparator, T_UnderlyingContainer>
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  std::size_t BinaryHeap<T, TComparator, TUnderlyingContainer>
   ::size() const noexcept
   {
     return _uc.size();
   }
   
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  template <typename T_Functor>
-  void BinaryHeap<T, T_Comparator, T_UnderlyingContainer>
-  ::apply(const T_Functor& functor) const
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  template <typename TFunctor>
+  void BinaryHeap<T, TComparator, TUnderlyingContainer>
+  ::apply(const TFunctor& functor) const
   {
     for (const auto& value : _uc)
       functor(value);
   }
 
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  void BinaryHeap<T, T_Comparator, T_UnderlyingContainer>
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  void BinaryHeap<T, TComparator, TUnderlyingContainer>
   ::percolateUp(std::uint32_t elemIndex) noexcept
   {
     if (elemIndex == 0)
@@ -99,8 +99,8 @@ namespace tree
     while (parentIndex != 0 && swapped);
   }
   
-  template <typename T, typename T_Comparator, typename T_UnderlyingContainer>
-  void BinaryHeap<T, T_Comparator, T_UnderlyingContainer>
+  template <typename T, typename TComparator, typename TUnderlyingContainer>
+  void BinaryHeap<T, TComparator, TUnderlyingContainer>
   ::percolateDown(std::size_t size) noexcept
   {
     if (size < 2)
