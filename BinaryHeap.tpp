@@ -51,7 +51,7 @@ namespace tree
   template <typename T, typename TComparator, typename TUnderlyingContainer>
   void BinaryHeap<T, TComparator, TUnderlyingContainer>::sort() noexcept
   {
-    for (int i = _uc.size() - 1; i >= 0; --i)
+    for (std::int32_t i = _uc.size() - 1; i >= 0; --i)
       {
 	std::swap(_uc[0], _uc[i]);
 	percolateDown(i);

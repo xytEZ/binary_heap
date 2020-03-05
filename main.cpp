@@ -3,7 +3,10 @@
 
 #include "BinaryHeap.hh"
 
-auto g_displayer = [](int value) -> void { std::cout << value << " "; };
+constexpr auto g_displayer = [](auto value) -> void
+{
+  std::cout << value << " ";
+};
   
 void testCase_0()
 {
